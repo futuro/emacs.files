@@ -114,6 +114,32 @@
 (tool-bar-mode -1)
 
 ;;;
+;;; Clojure/Lisps
+;;;
+
+;(use-package paredit)
+(use-package smartparens
+  :hook (clojure-mode . smartparens-strict-mode))
+
+(use-package clojure-mode
+  :init
+  (add-hook 'clojure-mode-hook #'subword-mode))
+;(use-package clojure-mode-extra-font-locking)
+(use-package cider
+  :hook (clojure-mode . cider-mode))
+(use-package clj-refactor
+  :hook (clojure-mode . clj-refactor-mode))
+
+;;;
+;;; Misc
+;;;
+
+(use-package rainbow-delimiters
+  :hook clojure-mode)
+(use-package magit)
+(use-package exec-path-from-shell)
+
+;;;
 ;;; Custom Loading
 ;;;
 
