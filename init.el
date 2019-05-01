@@ -41,6 +41,8 @@
 ;;  And now some packages
 ;;;
 
+;; Package meta-setup
+
 (require 'package)
 ;; tells emacs not to load any packages before starting up
 (setq package-enable-at-startup nil)
@@ -51,6 +53,9 @@
                          ("melpa"     . "https://melpa.org/packages/")))
 (package-initialize)
 
+;; `use-package' is the way we're going to load packages and handle
+;; their configuration and dependencies
+;;
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package) ; unless it is already installed
   (package-refresh-contents) ; update packages archive
@@ -58,17 +63,54 @@
 
 (require 'use-package)
 
+(use-package which-key)
+
 ;; A nicer way to define key bindings
 ;; https://github.com/noctuid/general.el#about
-(use-package general :ensure t
-	     :config
-	     (general-define-key "C-'" 'avy-goto-word-1))
+(use-package general
+  :config
+  (general-define-key "C-'" 'avy-goto-word-1))
 
 ;; "avy is a GNU Emacs package for jumping to visible text
 ;;  using a char-based decision tree."
 ;; https://github.com/abo-abo/avy#introduction
-(use-package avy :ensure t
-	     :commands (avy-goto-word-1))
+(use-package avy
+  :ensure t
+  :commands (avy-goto-word-1))
 
+;; Install `ivy', `swiper', and `counsel' in one go
+(use-package counsel
+  :ensure t
+  :config
+  (setq ivy-use-virtual-buffers t)
+  (ivy-mode 1)
+  (general-define-key "C-s" 'swiper
+		      "M-x" 'counsel-M-x
+		      "C-x C-f" 'counsel-find-file
+		      "C-c C-r" 'ivy-resume))
+
+;; (use-package hydra)
+
+;; (use-package ivy-hydra
+;;   :after (ivy hydra))
+
+;;;
+;;; UI and Theming
+;;;
+
+;; Use my favorite theme
+(use-package zenburn-theme)
+
+;; Disable the menu GUI elements
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+
+;;;
+;;; Custom Loading
+;;;
+
+;; Put our custom file inside of version control
+;; (and make sure it won't mess with loading our init.el)
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
