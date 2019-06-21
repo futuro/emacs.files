@@ -119,7 +119,9 @@
 
 ;(use-package paredit)
 (use-package smartparens
-  :hook (clojure-mode . smartparens-strict-mode))
+  :hook ((clojure-mode . smartparens-strict-mode)
+	 (elisp-mode . smartparens-strict-mode))
+;(require 'smartparens-config)
 
 (use-package clojure-mode
   :init
@@ -135,9 +137,11 @@
 ;;;
 
 (use-package rainbow-delimiters
-  :hook clojure-mode)
+  :hook (clojure-mode . rainbow-delimiters-mode))
 (use-package magit)
 (use-package exec-path-from-shell)
+
+(global-display-line-numbers-mode)
 
 ;;;
 ;;; Custom Loading
