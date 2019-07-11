@@ -131,6 +131,7 @@
   :hook (clojure-mode . cider-mode))
 (use-package clj-refactor
   :hook (clojure-mode . clj-refactor-mode))
+(use-package sayid)
 
 ;;;
 ;;; Misc
