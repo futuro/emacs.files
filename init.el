@@ -118,11 +118,10 @@
 ;;; Clojure/Lisps
 ;;;
 
-;(use-package paredit)
 (use-package smartparens
-  :hook ((clojure-mode . smartparens-strict-mode)
-	 (elisp-mode . smartparens-strict-mode))
-;(require 'smartparens-config)
+  :init (smartparens-global-strict-mode)
+  :config
+  (require 'smartparens-config))
 
 (use-package clojure-mode
   :init
