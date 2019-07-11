@@ -137,6 +137,8 @@
   :hook (clojure-mode . clj-refactor-mode))
 (use-package sayid)
 
+(use-package company)
+
 ;;;
 ;;; Misc
 ;;;
