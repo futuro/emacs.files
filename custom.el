@@ -14,7 +14,7 @@
      ("helv" "helvetica" "arial" "fixed"))))
  '(package-selected-packages
    (quote
-    (rainbow-delimiters magit auto-package-update which-key counsel ivy avy general use-package))))
+    (counsel-projectile projectile rainbow-delimiters magit auto-package-update which-key counsel ivy avy general use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
