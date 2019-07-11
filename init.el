@@ -26,7 +26,7 @@
 
 ;; use utf-8 by default
 (setq coding-system-for-read 'utf-8)
-(setq coding-system-for-write 'utf-8 )
+(setq coding-system-for-write 'utf-8)
 
 ;; sentence SHOULD end with only a point.
 (setq sentence-end-double-space nil)
