@@ -146,6 +146,18 @@
 
 (global-display-line-numbers-mode)
 
+(use-package projectile
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :config
+  (projectile-mode +1)
+  (setq projectile-project-search-path '("~/devel/"))
+  (setq project-completion-system 'ivy))
+
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode))
+
 ;;;
 ;;; Customization Loading
 ;;;
