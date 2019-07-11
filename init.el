@@ -73,17 +73,20 @@
 (use-package which-key
   :init (which-key-mode))
 
-;; A nicer way to define key bindings
+;; A nicer way to define key bindings.
+;;
+;; TODO: read about the use-package keywords to see if this is helpful
+;; or not.
+;; https://github.com/noctuid/general.el#use-package-keywords
+;;
 ;; https://github.com/noctuid/general.el#about
-(use-package general
-  :config
-  (general-define-key "C-'" 'avy-goto-word-1))
+;;(use-package general)
 
 ;; "avy is a GNU Emacs package for jumping to visible text
 ;;  using a char-based decision tree."
 ;; https://github.com/abo-abo/avy#introduction
 (use-package avy
-  :ensure t
+  :bind ("C-'" 'avy-goto-word-1)
   :commands (avy-goto-word-1))
 
 ;; Install `ivy', `swiper', and `counsel' in one go
