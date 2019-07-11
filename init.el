@@ -128,7 +128,7 @@
 (use-package clojure-mode
   :init
   (add-hook 'clojure-mode-hook #'subword-mode))
-;(use-package clojure-mode-extra-font-locking)
+
 (use-package cider
   :hook (clojure-mode . cider-mode))
 (use-package clj-refactor
