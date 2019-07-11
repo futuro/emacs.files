@@ -88,7 +88,6 @@
 
 ;; Install `ivy', `swiper', and `counsel' in one go
 (use-package counsel
-  :ensure t
   :config
   (setq ivy-use-virtual-buffers t)
   (ivy-mode 1)
@@ -96,11 +95,6 @@
 		      "M-x" 'counsel-M-x
 		      "C-x C-f" 'counsel-find-file
 		      "C-c C-r" 'ivy-resume))
-
-;; (use-package hydra)
-
-;; (use-package ivy-hydra
-;;   :after (ivy hydra))
 
 ;;;
 ;;; UI and Theming
