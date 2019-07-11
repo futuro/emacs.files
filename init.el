@@ -99,6 +99,13 @@
 		      "C-x C-f" 'counsel-find-file
 		      "C-c C-r" 'ivy-resume))
 
+;; This provides flexible matching that more accurately aligns with
+;; how we might think about string matches. `ivy' uses it if it's
+;; available, thus why I'm requiring it.
+;;
+;; https://github.com/lewang/flx
+(use-package flx)
+
 ;;;
 ;;; UI and Theming
 ;;;
