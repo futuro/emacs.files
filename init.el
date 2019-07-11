@@ -70,7 +70,9 @@
   (setq auto-package-update-delete-old-versions t)
   (setq auto-package-update-hide-results t))
 
-(use-package which-key)
+(use-package which-key
+  :ensure t
+  :init (which-key-mode))
 
 ;; A nicer way to define key bindings
 ;; https://github.com/noctuid/general.el#about
