@@ -140,7 +140,9 @@
 (use-package rainbow-delimiters
   :hook (clojure-mode . rainbow-delimiters-mode))
 (use-package magit)
-(use-package exec-path-from-shell)
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
 
 (global-display-line-numbers-mode)
 
