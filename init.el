@@ -147,7 +147,7 @@
 (global-display-line-numbers-mode)
 
 ;;;
-;;; Custom Loading
+;;; Customization Loading
 ;;;
 
 ;; Put our custom file inside of version control
