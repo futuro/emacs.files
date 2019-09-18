@@ -86,18 +86,20 @@
 ;;  using a char-based decision tree."
 ;; https://github.com/abo-abo/avy#introduction
 (use-package avy
-  :bind ("C-'" 'avy-goto-word-1)
-  :commands (avy-goto-word-1))
+  :bind ("C-'" . avy-goto-word-1))
 
 ;; Install `ivy', `swiper', and `counsel' in one go
 (use-package counsel
   :config
   (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
   (ivy-mode 1)
   (general-define-key "C-s" 'swiper
 		      "M-x" 'counsel-M-x
 		      "C-x C-f" 'counsel-find-file
 		      "C-c C-r" 'ivy-resume))
+
+(use-package ivy-hydra)
 
 ;; This provides flexible matching that more accurately aligns with
 ;; how we might think about string matches. `ivy' uses it if it's
@@ -124,20 +126,39 @@
 
 (use-package smartparens
   :init (smartparens-global-strict-mode)
+  :bind
+  ("M-(" . sp-wrap-round)
+  ;; All the ctrl/meta-bracket/brace keys are used or map to ESC, so
+  ;; instead we'll use the key right next to them. Navigating through
+  ;; completions still works with this setup.
+  ("M-p" . sp-wrap-square)
+  ("M-P" . sp-wrap-curly)
+  ("C-<left>" . sp-forward-slurp-sexp)
   :config
   (require 'smartparens-config))
 
 (use-package clojure-mode
   :init
-  (add-hook 'clojure-mode-hook #'subword-mode))
+  (add-hook 'clojure-mode-hook #'subword-mode)
+  (add-hook 'clojure-mode-hook #'hs-minor-mode))
 
 (use-package cider
-  :hook (clojure-mode . cider-mode))
+  :hook (clojure-mode . cider-mode)
+  :config
+  (setq cider-prompt-for-symbol nil)
+  (setq cider-repl-history-file "~/.emacs.d/repl-history.clj"))
+
 (use-package clj-refactor
   :hook (clojure-mode . clj-refactor-mode))
-(use-package sayid)
 
-(use-package company)
+(use-package sayid
+  :after clojure-mode
+  :config
+  (sayid-setup-package))
+
+(use-package company
+  :config
+  (global-company-mode))
 
 ;;;
 ;;; Misc
@@ -145,7 +166,13 @@
 
 (use-package rainbow-delimiters
   :hook (clojure-mode . rainbow-delimiters-mode))
+
 (use-package magit)
+
+(use-package git-link
+  :config
+  (setq git-link-use-commit t))
+
 (use-package exec-path-from-shell
   :config
   (exec-path-from-shell-initialize))
@@ -164,6 +191,14 @@
   :config
   (counsel-projectile-mode))
 
+(use-package org-plus-contrib
+  :hook (org-mode . auto-fill-mode))
+
+(use-package csv-mode)
+
+;(setq org-directory (concat ))
+;(setq org-default-notes-file
+;      (concat org-directory "/notes.org"))
 ;;;
 ;;; Customization Loading
 ;;;
