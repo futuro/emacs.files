@@ -160,6 +160,11 @@
   :config
   (global-company-mode))
 
+(use-package slime
+  :config
+  (setq inferior-lisp-program "/bin/sbcl")
+  (setq slime-contribs '(slime-fancy)))
+
 ;;;
 ;;; Misc
 ;;;
