@@ -201,6 +201,7 @@
 
 (use-package csv-mode)
 
+(winner-mode t)
 ;(setq org-directory (concat ))
 ;(setq org-default-notes-file
 ;      (concat org-directory "/notes.org"))
