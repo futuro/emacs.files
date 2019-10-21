@@ -12,3 +12,9 @@ tramp
 /elpa/
 recentf
 .last-package-update-day
+eshell/
+repl-history.clj
+projectile-bookmarks.eld
+projectile.cache
+.cache/
+transient/
