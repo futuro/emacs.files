@@ -207,8 +207,6 @@
   :config
   (exec-path-from-shell-initialize))
 
-(global-display-line-numbers-mode)
-
 (use-package projectile
   :bind-keymap
   ("C-c p" . projectile-command-map)
@@ -240,10 +238,22 @@
   :config
   (push 'company-robe company-backends))
 
+;; Undo/redo window changes
 (winner-mode t)
+;; SHIFT-arrowkey to move between buffers
 (windmove-default-keybindings)
+
+;; Put window splits side-by-side instead of stacked
 (setq ediff-split-window-function 'split-window-horizontally)
+;; Don't put the help window in its own frame when using GUI emacs
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+;; Enable line numbers everywhere for easier pairing
+(global-display-line-numbers-mode)
+;; Don't shrink line number width
+(setq display-line-numbers-grow-only t)
+;; Use absolute line numbers, instead of relative
+(setq display-line-numbers-type t)
 
 ;(setq org-directory (concat ))
 ;(setq org-default-notes-file
