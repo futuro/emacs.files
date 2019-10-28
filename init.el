@@ -215,7 +215,8 @@
   :config
   (projectile-mode +1)
   (setq projectile-project-search-path '("~/devel/"))
-  (setq project-completion-system 'ivy))
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-enable-caching nil))
 
 (use-package counsel-projectile
   :config
@@ -241,6 +242,9 @@
 
 (winner-mode t)
 (windmove-default-keybindings)
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
 ;(setq org-directory (concat ))
 ;(setq org-default-notes-file
 ;      (concat org-directory "/notes.org"))
