@@ -226,6 +226,19 @@
 
 (use-package csv-mode)
 
+(use-package enh-ruby-mode
+  :config
+  (add-to-list 'auto-mode-alist
+             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode)))
+
+(use-package robe
+  :after (company)
+  :hook
+  (ruby-mode-hook . robe-mode)
+  (enh-ruby-mode-hook . robe-mode)
+  :config
+  (push 'company-robe company-backends))
+
 (winner-mode t)
 ;(setq org-directory (concat ))
 ;(setq org-default-notes-file
