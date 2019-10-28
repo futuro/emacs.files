@@ -240,6 +240,7 @@
   (push 'company-robe company-backends))
 
 (winner-mode t)
+(windmove-default-keybindings)
 ;(setq org-directory (concat ))
 ;(setq org-default-notes-file
 ;      (concat org-directory "/notes.org"))
