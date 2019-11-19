@@ -192,8 +192,38 @@
   (setq slime-contribs '(slime-fancy)))
 
 ;;;
+;;  Web Development Settings
+;;;
+
+(use-package js2-mode)
+
+(use-package rjsx-mode
+  :after (js2-mode))
+
+;;;
+;;  Ruby Shenanigans
+;;;
+
+(use-package enh-ruby-mode
+  :config
+  (add-to-list 'auto-mode-alist
+             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode)))
+
+(use-package robe
+  :after (company)
+  :hook
+  (ruby-mode . robe-mode)
+  (enh-ruby-mode . robe-mode)
+  :config
+  (push 'company-robe company-backends))
+
+;;;
 ;;; Misc
 ;;;
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
 
 (use-package rainbow-delimiters
   :hook (clojure-mode . rainbow-delimiters-mode))
@@ -225,19 +255,6 @@
   :hook (org-mode . auto-fill-mode))
 
 (use-package csv-mode)
-
-(use-package enh-ruby-mode
-  :config
-  (add-to-list 'auto-mode-alist
-             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode)))
-
-(use-package robe
-  :after (company)
-  :hook
-  (ruby-mode-hook . robe-mode)
-  (enh-ruby-mode-hook . robe-mode)
-  :config
-  (push 'company-robe company-backends))
 
 ;; Undo/redo window changes
 (winner-mode t)
