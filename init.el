@@ -163,6 +163,7 @@
   (require 'smartparens-config))
 
 (use-package clojure-mode
+  :mode "\\.repl\\'"
   :init
   (add-hook 'clojure-mode-hook #'subword-mode)
   (add-hook 'clojure-mode-hook #'hs-minor-mode))
