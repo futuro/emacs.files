@@ -252,7 +252,10 @@
   (counsel-projectile-mode))
 
 (use-package org-plus-contrib
-  :hook (org-mode . auto-fill-mode))
+  :hook (org-mode . auto-fill-mode)
+  :bind
+  ("C-c l" . org-store-link)
+  ("C-c c" . org-capture))
 
 (use-package csv-mode)
 
