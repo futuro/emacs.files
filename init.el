@@ -285,8 +285,16 @@ theme's background."
 
 (use-package csv-mode)
 
+;; Better window selection
+(use-package ace-window
+  :bind
+  ("M-o" . ace-window)
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+
 ;; Undo/redo window changes
 (winner-mode t)
+
 ;; SHIFT-arrowkey to move between buffers
 (windmove-default-keybindings)
 
