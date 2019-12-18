@@ -258,11 +258,6 @@
   :config
   (counsel-projectile-mode))
 
-(use-package org-plus-contrib
-  :hook (org-mode . auto-fill-mode)
-  :bind
-  ("C-c l" . org-store-link)
-  ("C-c c" . org-capture))
 (use-package htmlize)
 
 ;; Jacked from https://emacs.stackexchange.com/q/3374
@@ -282,6 +277,41 @@ theme's background."
         (format "<style type=\"text/css\">\n pre.src {background-color: %s; color: %s;}</style>\n"
                 my-pre-bg my-pre-fg))))))
 
+(use-package org
+  :ensure org-plus-contrib
+  :mode (("\\.org$" . org-mode))
+  :commands (org-store-link org-capture)
+  :hook ((org-mode . auto-fill-mode)
+	 (org-export-before-processing-hook . 'my/org-inline-css-hook))
+  :bind (("C-c l" . org-store-link)
+	 ("C-c c" . org-capture))
+  :config
+  (require 'ox-md)
+  (require 'ox-html)
+  (require 'ox-org)
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (setq org-capture-templates
+	'(("r" "Recording research notes"
+	   ;; Make an entry when we capture. Another possibility is to
+	   ;; have a function that picks where to put the entry
+	   entry
+	   ;; put it in the `org-default-notes-file' until I think of
+	   ;; something better
+	   (file "")
+	   ;; The template
+	   "* Test header
+  Current user: %n
+  Current File: %f
+  Full Path: %F
+
+  Annotation: %a
+  Prompted Annotation: %A
+  Bare link: %l
+
+  Initial Content:
+  "
+	   )))
+  )
 
 (use-package csv-mode)
 
