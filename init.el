@@ -119,10 +119,11 @@
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (ivy-mode 1)
-  (general-define-key "C-s" 'swiper
-		      "M-x" 'counsel-M-x
-		      "C-x C-f" 'counsel-find-file
-		      "C-c C-r" 'ivy-resume))
+  :bind
+  ("C-s" . swiper)
+  ("M-x" . counsel-M-x)
+  ("C-x C-f" . counsel-find-file)
+  ("C-c C-r" . ivy-resume))
 
 (use-package ivy-hydra)
 
