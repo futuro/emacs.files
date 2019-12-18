@@ -195,7 +195,9 @@
 ;;  Web Development Settings
 ;;;
 
-(use-package js2-mode)
+(use-package js2-mode
+  :config
+  (setq js-indent-level 2))
 
 (use-package rjsx-mode
   :after (js2-mode))
