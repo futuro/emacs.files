@@ -232,6 +232,11 @@
 
 (use-package magit)
 
+(use-package forge
+  :after magit
+  :config
+  (setq auth-sources (quote ("~/.authinfo.gpg"))))
+
 (use-package git-link
   :config
   (setq git-link-use-commit t))
