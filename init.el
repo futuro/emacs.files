@@ -261,6 +261,22 @@
   :config
   (counsel-projectile-mode))
 
+;;;
+;;  Document Editing
+;;;
+
+;; Edit regions in separate buffers, like `org-edit-src-code' but for
+;; arbitrary regions.
+(use-package edit-indirect)
+
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
 (use-package htmlize)
 
 ;; Jacked from https://emacs.stackexchange.com/q/3374
