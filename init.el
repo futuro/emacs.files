@@ -114,7 +114,9 @@
 ;;  using a char-based decision tree."
 ;; https://github.com/abo-abo/avy#introduction
 (use-package avy
-  :bind ("C-'" . avy-goto-word-1))
+  :bind
+  ("C-'" . avy-goto-word-1)
+  ("C-\"" . avy-goto-char))
 
 ;; Install `ivy', `swiper', and `counsel' in one go
 (use-package counsel
