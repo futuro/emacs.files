@@ -118,6 +118,8 @@
   ("C-'" . avy-goto-word-1)
   ("C-\"" . avy-goto-char))
 
+(use-package wgrep)
+
 ;; Install `ivy', `swiper', and `counsel' in one go
 (use-package counsel
   :config
