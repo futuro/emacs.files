@@ -37,6 +37,9 @@
 ;; print a default message in the empty scratch buffer opened at startup
 (setq initial-scratch-message "Welcome to Emacs")
 
+;; Set up a global key for hs-toggle-hiding
+(global-set-key (kbd "M-/") 'hs-toggle-hiding)
+
 ;;;
 ;;  Fonts
 ;;;
