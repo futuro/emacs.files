@@ -6,6 +6,20 @@
  '(package-selected-packages
    (quote
     (wgrep edit-indirect ace-window forge htmlize htlmize flycheck robe csv-mode ivy-hydra org-plus-contrib git-link company flx counsel-projectile projectile rainbow-delimiters magit auto-package-update which-key counsel ivy avy general use-package)))
+ '(safe-local-variable-values
+   (quote
+    ((eval put-clojure-indent
+	   (quote optional-field)
+	   (quote defun))
+     (eval put-clojure-indent
+	   (quote field)
+	   (quote defun))
+     (eval put-clojure-indent
+	   (quote variant)
+	   (quote defun))
+     (eval put-clojure-indent
+	   (quote alias)
+	   1)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
