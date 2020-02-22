@@ -98,6 +98,30 @@
   (setq auto-package-update-delete-old-versions t)
   (setq auto-package-update-hide-results t))
 
+;; mu4e is installed locally
+(use-package mu4e
+  :load-path "/usr/share/emacs/site-lisp/mu/mu4e"
+  :config
+  (setq
+   ;; top-level Maildir
+   mu4e-maildir       "~/mail/eniessenderry"
+   ;; folder for sent messages
+   mu4e-sent-folder   "/Sent_Mail"
+   ;; unfinished messages
+   mu4e-drafts-folder "/Drafts"
+   ;; trashed  messages
+   mu4e-trash-folder  "/Trash"
+
+   mu4e-maildir-shortcuts
+   '(("/INBOX" . ?i)
+     ("/Sent_Mail" . ?s)
+     ("/Trash" . ?t)
+     ("/All_Mail" . ?a))
+
+   mu4e-html2text-command
+   "pandoc --from=html --to=plain -"
+   mu4e-get-mail-command "offlineimap"))
+
 (use-package which-key
   :init (which-key-mode))
 
