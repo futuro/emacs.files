@@ -352,17 +352,13 @@ theme's background."
 	   ;; The template
 	   "* Test header
   Current user: %n
-  Current File: %f
-  Full Path: %F
+  Current File: ~%f~
+  Full Path: ~%F~
 
-  Annotation: %a
-  Prompted Annotation: %A
-  Bare link: %l
+  #+BEGIN_SRC %(symbol-name major-mode)
 
-  Initial Content:
-  "
-	   )))
-  )
+  #+END_SRC
+ "))))
 
 (use-package csv-mode)
 
