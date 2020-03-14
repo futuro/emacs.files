@@ -340,7 +340,9 @@ theme's background."
   (require 'ox-md)
   (require 'ox-html)
   (require 'ox-org)
+  (add-to-list 'org-src-lang-modes '("enh-ruby" . ruby))
   (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (setq org-refile-targets '((nil . (:maxlevel . 20)))) ; Let me refile to any heading in the buffer
   (setq org-capture-templates
 	'(("r" "Recording research notes"
 	   ;; Make an entry when we capture. Another possibility is to
