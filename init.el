@@ -328,6 +328,62 @@ theme's background."
         (format "<style type=\"text/css\">\n pre.src {background-color: %s; color: %s;}</style>\n"
                 my-pre-bg my-pre-fg))))))
 
+;;;
+;;  Let's Get ORGanized!
+;;;
+
+;;; Supporting functions
+
+;; TODO: is this necessary, or is which-func loaded by default?
+(require 'which-func)
+
+;; Borrowed and Inspired by https://gitlab.com/howardabrams/spacemacs.d/-/blob/b356637e49500d0856b7128ce764ca12cb32c2a1/layers/ha-org/funcs.el#L352
+
+
+;; TODO: ~futuro/org-capture-fileref-snippet~ needs to be called
+;; within a ~with-current-buffer~ macro, I think. Is there a way to
+;; make that less implicitly necessary?
+
+(defun futuro/org-capture-fileref-snippet (f type headers func-name)
+  "Given a file F, a structure template TYPE, any desired
+HEADERS, and an optional FUNC-NAME, return a structural template
+referencing the file the snippet came from, and with the type
+specified."
+  (let* ((code-snippet
+	  (buffer-substring-no-properties (mark) (- (point) 1)))
+	 (file-name   (buffer-file-name))
+	 (file-base   (file-name-nondirectory file-name))
+	 (line-number (line-number-at-pos (region-beginning)))
+	 (initial-txt (if (null func-name)
+			  (format "From [[file:%s::%s][%s]]:"
+				  file-name line-number file-base)
+			(format "From ~%s~ (in [[file:%s::%s][%s]]):"
+				func-name file-name line-number
+				file-base))))
+    (format "
+   %s
+
+   #+BEGIN_%s %s
+%s
+   #+END_%s" initial-txt type headers code-snippet type)))
+
+(defun futuro/org-capture-code-snippet (f)
+  "Capture a code snippet from file F.
+
+Given a file, F, this captures the currently selected text
+within an Org SRC block with a language based on the current mode
+and a backlink to the function and the file."
+  (with-current-buffer (find-buffer-visiting f)
+    (let ((org-src-mode (replace-regexp-in-string "-mode" "" (format "%s" major-mode)))
+          (func-name (which-function)))
+      (futuro/org-capture-fileref-snippet f "SRC" org-src-mode func-name))))
+
+(defun futuro/org-capture-clip-snippet (f)
+  "Given a file, F, this captures the currently selected text
+within an Org EXAMPLE block and a backlink to the file."
+  (with-current-buffer (find-buffer-visiting f)
+    (futuro/org-capture-fileref-snippet f "EXAMPLE" "" nil)))
+
 (use-package org
   :ensure org-plus-contrib
   :mode (("\\.org$" . org-mode))
@@ -344,7 +400,18 @@ theme's background."
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-refile-targets '((nil . (:maxlevel . 20)))) ; Let me refile to any heading in the buffer
   (setq org-capture-templates
-	'(("r" "Recording research notes"
+	'(("c" "Clock experiments"
+	   ;; Plain, non-list item
+	   plain
+	   ;; Put it with the currently clocked item, for ease of
+	   ;; selecting capture location
+	   (clock)
+	   ;; Drop in a captured code snippet with point afterwards
+	   "%(futuro/org-capture-code-snippet \"%F\")\n\n %?"
+	   ;; 1 line of padding around the item
+	   :empty-lines 1)
+
+	  ("r" "Recording research notes"
 	   ;; Make an entry when we capture. Another possibility is to
 	   ;; have a function that picks where to put the entry
 	   entry
