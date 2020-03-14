@@ -204,7 +204,8 @@
   :hook (clojure-mode . cider-mode)
   :config
   (setq cider-prompt-for-symbol nil)
-  (setq cider-repl-history-file "~/.emacs.d/repl-history.clj"))
+  (setq cider-repl-history-file "~/.emacs.d/repl-history.clj")
+  (setq cider-repl-pop-to-buffer-on-connect nil))
 
 (use-package clj-refactor
   :hook (clojure-mode . clj-refactor-mode))
