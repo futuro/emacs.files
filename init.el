@@ -398,18 +398,21 @@ specified."
 	 (file-name   (buffer-file-name))
 	 (file-base   (file-name-nondirectory file-name))
 	 (line-number (line-number-at-pos (region-beginning)))
+	 (git-link    (git-link-url (git-link--select-remote) line-number))
+	 (remote-link (if (string-match "Remote .+ not found" git-link)
+			  "/(no remote available)"
+			(format "/[[%s][(remote)]]" git-link)))
 	 (initial-txt (if (null func-name)
-			  (format "From [[file:%s::%s][%s]]:"
-				  file-name line-number file-base)
-			(format "From ~%s~ (in [[file:%s::%s][%s]]):"
-				func-name file-name line-number
-				file-base))))
-    (format "
-   %s
+			  (format "From ~%s~ [[file:%s::%s][(local)]]%s:"
+				  file-base file-name line-number remote-link)
+			(format "From ~%s~ (in ~%s~ [[file:%s::%s][(local)]]%s):"
+				func-name file-base file-name line-number
+				remote-link))))
+    (format "%s
 
-   #+BEGIN_%s %s
+  #+BEGIN_%s %s -n %s -r -l \"%s (ref: %%s)\"
 %s
-   #+END_%s" initial-txt type headers code-snippet type)))
+  #+END_%s" initial-txt type headers line-number comment-start code-snippet type)))
 
 (defun futuro/org-capture-code-snippet (f)
   "Capture a code snippet from file F.
@@ -433,13 +436,21 @@ within an Org EXAMPLE block and a backlink to the file."
   :mode (("\\.org$" . org-mode))
   :commands (org-store-link org-capture)
   :hook ((org-mode . auto-fill-mode)
-	 (org-export-before-processing-hook . 'my/org-inline-css-hook))
+	 (org-export-before-processing . my/org-inline-css-hook))
   :bind (("C-c l" . org-store-link)
 	 ("C-c c" . org-capture))
   :config
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate)
   (require 'ox-md)
   (require 'ox-html)
   (require 'ox-org)
+  (setq org-babel-load-languages
+	'((emacs-lisp . t)
+	  (sql . t)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   org-babel-load-languages)
   (add-to-list 'org-src-lang-modes '("enh-ruby" . ruby))
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-refile-targets '((nil . (:maxlevel . 20)))) ; Let me refile to any heading in the buffer
@@ -451,27 +462,9 @@ within an Org EXAMPLE block and a backlink to the file."
 	   ;; selecting capture location
 	   (clock)
 	   ;; Drop in a captured code snippet with point afterwards
-	   "%(futuro/org-capture-code-snippet \"%F\")\n\n %?"
+	   "%? %(futuro/org-capture-code-snippet \"%F\")"
 	   ;; 1 line of padding around the item
-	   :empty-lines 1)
-
-	  ("r" "Recording research notes"
-	   ;; Make an entry when we capture. Another possibility is to
-	   ;; have a function that picks where to put the entry
-	   entry
-	   ;; put it in the `org-default-notes-file' until I think of
-	   ;; something better
-	   (file "")
-	   ;; The template
-	   "* Test header
-  Current user: %n
-  Current File: ~%f~
-  Full Path: ~%F~
-
-  #+BEGIN_SRC %(symbol-name major-mode)
-
-  #+END_SRC
- "))))
+	   :empty-lines 1))))
 
 (use-package csv-mode)
 
