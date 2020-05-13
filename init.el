@@ -35,10 +35,18 @@
 (setq default-fill-column 80)
 
 ;; print a default message in the empty scratch buffer opened at startup
-(setq initial-scratch-message "Welcome to Emacs")
+(setq initial-scratch-message ";; Welcome to Emacs")
 
 ;; Set up a global key for hs-toggle-hiding
 (global-set-key (kbd "M-/") 'hs-toggle-hiding)
+
+(eval-after-load "hideshow"
+  '(add-to-list 'hs-special-modes-alist
+              `(enh-ruby-mode
+                ,(rx (or "def" "class" "module" "do" "{" "[" "if" "else" "unless")) ; Block start
+                ,(rx (or "}" "]" "end"))                       ; Block end
+                ,(rx (or "#" "=begin"))                        ; Comment start
+                ruby-forward-sexp nil)))
 
 ;;;
 ;;  Fonts
@@ -63,7 +71,6 @@
 		      :width 'normal
 		      :foundry "xos4"
 		      :family "Terminess Powerline"))
-
 
 ;;;
 ;;  And now some packages
@@ -99,28 +106,29 @@
   (setq auto-package-update-hide-results t))
 
 ;; mu4e is installed locally
-(use-package mu4e
-  :load-path "/usr/share/emacs/site-lisp/mu/mu4e"
-  :config
-  (setq
-   ;; top-level Maildir
-   mu4e-maildir       "~/mail/eniessenderry"
-   ;; folder for sent messages
-   mu4e-sent-folder   "/Sent_Mail"
-   ;; unfinished messages
-   mu4e-drafts-folder "/Drafts"
-   ;; trashed  messages
-   mu4e-trash-folder  "/Trash"
+(if (not (eq system-type 'darwin))
+    (use-package mu4e
+      :load-path "/usr/share/emacs/site-lisp/mu/mu4e"
+      :config
+      (setq
+       ;; top-level Maildir
+       mu4e-maildir       "~/mail/eniessenderry"
+       ;; folder for sent messages
+       mu4e-sent-folder   "/Sent_Mail"
+       ;; unfinished messages
+       mu4e-drafts-folder "/Drafts"
+       ;; trashed  messages
+       mu4e-trash-folder  "/Trash"
 
-   mu4e-maildir-shortcuts
-   '(("/INBOX" . ?i)
-     ("/Sent_Mail" . ?s)
-     ("/Trash" . ?t)
-     ("/All_Mail" . ?a))
+       mu4e-maildir-shortcuts
+       '(("/INBOX" . ?i)
+	 ("/Sent_Mail" . ?s)
+	 ("/Trash" . ?t)
+	 ("/All_Mail" . ?a))
 
-   mu4e-html2text-command
-   "pandoc --from=html --to=plain -"
-   mu4e-get-mail-command "offlineimap"))
+       mu4e-html2text-command
+       "pandoc --from=html --to=plain -"
+       mu4e-get-mail-command "offlineimap")))
 
 (use-package which-key
   :init (which-key-mode))
@@ -184,13 +192,36 @@
 (use-package smartparens
   :init (smartparens-global-strict-mode)
   :bind
-  ("M-(" . sp-wrap-round)
-  ;; All the ctrl/meta-bracket/brace keys are used or map to ESC, so
-  ;; instead we'll use the key right next to them. Navigating through
-  ;; completions still works with this setup.
-  ("M-p" . sp-wrap-square)
-  ("M-P" . sp-wrap-curly)
-  ("C-<left>" . sp-forward-slurp-sexp)
+  (("M-(" . sp-wrap-round)
+   ;; All the ctrl/meta-bracket/brace keys are used or map to ESC, so
+   ;; instead we'll use the key right next to them. Navigating through
+   ;; completions still works with this setup.
+   ("M-p" . sp-wrap-square)
+   ("M-P" . sp-wrap-curly)
+   ;; Some movement commands.
+   ("C-M-f" . sp-forward-sexp)
+   ("C-M-b" . sp-backward-sexp)
+   ;; w is 'backward' because it's left of the e key
+   ("C-M-e" . sp-up-sexp)
+   ("C-M-w" . sp-backward-up-sexp)
+   ;; Directions define the movement of the delimiter. Slurping moves
+   ;; delimiter over next form, barfing moves delimiter before next
+   ;; form (or, said slightly differently, "barfs" the next form past
+   ;; the delimiter).
+   ("C-S-<right>" . sp-forward-slurp-sexp)
+   ("C-S-<left>" . sp-forward-barf-sexp)
+   ;; Unwrapping commands. Backspace was chosen for the `back'wards
+   ;; motion. I might change this in the future
+   ("S-M-<delete>" . sp-unwrap-sexp)
+   ("S-M-<backspace>" . sp-backward-unwrap-sexp)
+   ;; Splice commands. Here, backspace is used for the `back'ward
+   ;; motion as well.
+   ("C-M-<delete>" . sp-splice-sexp-killing-forward)
+   ("C-M-<backspace>" . sp-splice-sexp-killing-backward)
+   ;; Change inside the next/enclosing expression
+   ("M-i" . sp-change-inner) ; Change the inside of the next balanced expression
+   ("M-e" . sp-change-enclosing) ; Change the inside of the enclosing expression
+   )
   :config
   (require 'smartparens-config))
 
@@ -198,7 +229,8 @@
   :mode "\\.repl\\'"
   :init
   (add-hook 'clojure-mode-hook #'subword-mode)
-  (add-hook 'clojure-mode-hook #'hs-minor-mode))
+  (add-hook 'clojure-mode-hook #'hs-minor-mode)
+  (setq clojure-use-metadata-for-privacy t))
 
 (use-package cider
   :hook (clojure-mode . cider-mode)
@@ -239,7 +271,11 @@
 ;;  Ruby Shenanigans
 ;;;
 
+(use-package rspec-mode)
+
 (use-package enh-ruby-mode
+  :hook
+  (enh-ruby-mode . hs-minor-mode)
   :config
   (add-to-list 'auto-mode-alist
              '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode)))
@@ -270,7 +306,7 @@
 (use-package forge
   :after magit
   :config
-  (setq auth-sources (quote ("~/.authinfo.gpg"))))
+  (setq auth-sources (quote (macos-keychain-internet))))
 
 (use-package git-link
   :config
@@ -285,13 +321,21 @@
   ("C-c p" . projectile-command-map)
   :config
   (projectile-mode +1)
-  (setq projectile-project-search-path '("~/devel/"))
+  (setq projectile-project-search-path '("~/devel/" "~/devel/active-repos/" "~/devel/archived-repos/"))
   (setq projectile-completion-system 'ivy)
   (setq projectile-enable-caching nil))
 
 (use-package counsel-projectile
   :config
   (counsel-projectile-mode))
+
+;;;
+;;  SQL
+;;;
+
+(use-package sql-indent
+  :after sql
+  :hook ((sql-mode . sqlind-minor-mode)))
 
 ;;;
 ;;  Document Editing
