@@ -313,6 +313,7 @@
 
 (use-package exec-path-from-shell
   :config
+  (setq exec-path-from-shell-shell-name "/bin/zsh")
   (exec-path-from-shell-initialize))
 
 (use-package projectile
