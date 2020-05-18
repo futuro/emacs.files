@@ -46,7 +46,7 @@
                 ,(rx (or "def" "class" "module" "do" "{" "[" "if" "else" "unless")) ; Block start
                 ,(rx (or "}" "]" "end"))                       ; Block end
                 ,(rx (or "#" "=begin"))                        ; Comment start
-                ruby-forward-sexp nil)))
+                enh-ruby-forward-sexp nil)))
 
 ;;;
 ;;  Fonts
