@@ -279,6 +279,10 @@
   :hook
   (enh-ruby-mode . hs-minor-mode))
 
+(use-package yard-mode
+  :hook
+  (enh-ruby-mode . yard-mode))
+
 (use-package robe
   :after (company)
   :hook
