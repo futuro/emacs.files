@@ -161,6 +161,7 @@
   :bind
   ("C-s" . swiper)
   ("M-x" . counsel-M-x)
+  ("M-y" . counsel-yank-pop)
   ("C-x C-f" . counsel-find-file)
   ("C-c C-r" . ivy-resume))
 
@@ -299,7 +300,7 @@
   :ensure t
   :init (global-flycheck-mode)
   :config
-  (setq flycheck-global-modes '(not org-mode enh-ruby-mode)))
+  (setq flycheck-global-modes '(not org-mode)))
 
 (use-package rainbow-delimiters
   :hook (clojure-mode . rainbow-delimiters-mode))
