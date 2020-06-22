@@ -481,6 +481,8 @@ within an Org EXAMPLE block and a backlink to the file."
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
+(use-package writeroom-mode)
+
 ;; Undo/redo window changes
 (winner-mode t)
 
