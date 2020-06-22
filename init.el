@@ -58,7 +58,7 @@
 			:foreground "#DCDCCC"
 			:slant 'normal
 			:weight 'normal
-			:height 120
+			:height 100
 			:width 'normal
 			:foundry "nil"
 			:family "Source Code Pro for Powerline")
