@@ -401,7 +401,7 @@ HEADERS, and an optional FUNC-NAME, return a structural template
 referencing the file the snippet came from, and with the type
 specified."
   (let* ((code-snippet
-	  (buffer-substring-no-properties (mark) (- (point) 1)))
+	  (buffer-substring-no-properties (mark) (point)))
 	 (file-name   (buffer-file-name))
 	 (file-base   (file-name-nondirectory file-name))
 	 (line-number (line-number-at-pos (region-beginning)))
