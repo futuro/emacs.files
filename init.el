@@ -454,7 +454,8 @@ within an Org EXAMPLE block and a backlink to the file."
   (require 'ox-org)
   (setq org-babel-load-languages
 	'((emacs-lisp . t)
-	  (sql . t)))
+	  (sql . t)
+	  (shell . t)))
   (org-babel-do-load-languages
    'org-babel-load-languages
    org-babel-load-languages)
