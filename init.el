@@ -348,6 +348,10 @@
 ;;  Document Editing
 ;;;
 
+(use-package tex-site
+  :load-path "/usr/share/emacs/site-lisp"
+  :mode ("\\.tex\\'" . TeX-latex-mode))
+
 ;; Edit regions in separate buffers, like `org-edit-src-code' but for
 ;; arbitrary regions.
 (use-package edit-indirect)
