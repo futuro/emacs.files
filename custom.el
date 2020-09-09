@@ -11,7 +11,10 @@
     (wgrep edit-indirect ace-window forge htmlize htlmize flycheck robe csv-mode ivy-hydra org-plus-contrib git-link company flx counsel-projectile projectile rainbow-delimiters magit auto-package-update which-key counsel ivy avy general use-package)))
  '(safe-local-variable-values
    (quote
-    ((eval put-clojure-indent
+    ((put-clojure-indent
+      (quote action)
+      :defn)
+     (eval put-clojure-indent
 	   (quote optional-field)
 	   (quote defun))
      (eval put-clojure-indent
