@@ -330,7 +330,9 @@
       (setq projectile-project-search-path '("~/devel/"))
     (setq projectile-project-search-path '("~/devel/" "~/devel/active-repos/" "~/devel/archived-repos/")))
   (setq projectile-completion-system 'ivy)
-  (setq projectile-enable-caching nil))
+  (setq projectile-enable-caching nil)
+  (push ".cpcache" projectile-globally-ignored-directories)
+  (push ".shadow-cljs" projectile-globally-ignored-directories))
 
 (use-package counsel-projectile
   :config
