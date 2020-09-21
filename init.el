@@ -257,6 +257,8 @@
   (setq inferior-lisp-program "/bin/sbcl")
   (setq slime-contribs '(slime-fancy)))
 
+(use-package fennel-mode)
+
 ;;;
 ;;  Web Development Settings
 ;;;
