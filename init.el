@@ -179,7 +179,9 @@
 ;;;
 
 ;; Use my favorite theme
-(use-package zenburn-theme)
+(use-package zenburn-theme
+  :config
+  (enable-theme 'zenburn))
 
 ;; Disable the menu GUI elements
 (menu-bar-mode -1)
