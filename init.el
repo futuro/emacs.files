@@ -37,6 +37,11 @@
 ;; print a default message in the empty scratch buffer opened at startup
 (setq initial-scratch-message ";; Welcome to Emacs")
 
+;; I often want pdfs and friends to auto-revert when their contents
+;; change, since I'm likely editing the source tex doc while viewing
+;; it
+(add-hook 'doc-view-mode-hook 'auto-revert-mode)
+
 ;; Set up a global key for hs-toggle-hiding
 (global-set-key (kbd "M-/") 'hs-toggle-hiding)
 
