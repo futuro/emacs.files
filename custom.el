@@ -9,7 +9,10 @@
    (quote
     (wgrep edit-indirect ace-window forge htmlize htlmize flycheck robe csv-mode ivy-hydra org-plus-contrib git-link company flx counsel-projectile projectile rainbow-delimiters magit auto-package-update which-key counsel ivy avy general use-package)))
  '(safe-local-variable-values
-   '((put-clojure-indent 'action :defn)
+   '((cider-shadow-default-options . ":main")
+     (cider-preferred-build-tool . shadow-cljs)
+     (cider-default-cljs-repl . shadow)
+     (put-clojure-indent 'action :defn)
      (eval put-clojure-indent 'optional-field 'defun)
      (eval put-clojure-indent 'field 'defun)
      (eval put-clojure-indent 'variant 'defun)
