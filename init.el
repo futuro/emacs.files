@@ -317,6 +317,8 @@
 ;;; Misc
 ;;;
 
+(use-package dockerfile-mode)
+
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
