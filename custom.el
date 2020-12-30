@@ -7,7 +7,7 @@
    '("7aaee3a00f6eb16836f5b28bdccde9e1079654060d26ce4b8f49b56689c51904" default))
  '(package-selected-packages
    (quote
-    (wgrep edit-indirect ace-window forge htmlize htlmize flycheck robe csv-mode ivy-hydra org-plus-contrib git-link company flx counsel-projectile projectile rainbow-delimiters magit auto-package-update which-key counsel ivy avy general use-package)))
+    (dockerfile-mode yaml-mode web-mode fennel-mode sql-indent rspec-mode wgrep edit-indirect ace-window forge htmlize htlmize flycheck robe csv-mode ivy-hydra org-plus-contrib git-link company flx counsel-projectile projectile rainbow-delimiters magit auto-package-update which-key counsel ivy avy general use-package)))
  '(safe-local-variable-values
    '((cider-shadow-default-options . ":main")
      (cider-preferred-build-tool . shadow-cljs)
