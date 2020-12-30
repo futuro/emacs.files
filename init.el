@@ -543,3 +543,6 @@ within an Org EXAMPLE block and a backlink to the file."
 ;; (and make sure it won't mess with loading our init.el)
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+
+;; Start an emacs server
+(server-start)
