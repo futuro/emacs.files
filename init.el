@@ -284,6 +284,11 @@
 (use-package rjsx-mode
   :after (js2-mode))
 
+(use-package web-mode
+  :mode "\\.erb\\'"
+  :config
+  (setq web-mode-markup-indent-offset 2))
+
 ;;;
 ;;  Ruby Shenanigans
 ;;;
