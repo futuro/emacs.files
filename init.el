@@ -470,9 +470,11 @@ within an Org EXAMPLE block and a backlink to the file."
   :mode (("\\.org$" . org-mode))
   :commands (org-store-link org-capture)
   :hook ((org-mode . auto-fill-mode)
+	 (org-mode . flyspell-mode)
 	 (org-export-before-processing . my/org-inline-css-hook))
   :bind (("C-c l" . org-store-link)
-	 ("C-c c" . org-capture))
+	 ("C-c c" . org-capture)
+	 ([remap org-cycle-agenda-files] . avy-goto-word-1))
   :config
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
