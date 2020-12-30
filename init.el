@@ -267,6 +267,13 @@
 (use-package fennel-mode)
 
 ;;;
+;;  Whitespace Sensitive Formats
+;;;
+
+(use-package yaml-mode
+  :mode "\\.yml\\'")
+
+;;;
 ;;  Web Development Settings
 ;;;
 
