@@ -233,6 +233,12 @@
   :config
   (require 'smartparens-config))
 
+(use-package highlight-parentheses
+  :ensure t
+  :config
+  (highlight-parentheses-mode)
+  (global-highlight-parentheses-mode))
+
 (use-package clojure-mode
   :mode "\\.repl\\'"
   :init
