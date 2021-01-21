@@ -290,30 +290,6 @@
   (setq web-mode-markup-indent-offset 2))
 
 ;;;
-;;  Ruby Shenanigans
-;;;
-
-(use-package rspec-mode)
-
-(use-package enh-ruby-mode
-  :mode "\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-  :interpreter "ruby"
-  :hook
-  (enh-ruby-mode . hs-minor-mode))
-
-(use-package yard-mode
-  :hook
-  (enh-ruby-mode . yard-mode))
-
-(use-package robe
-  :after (company)
-  :hook
-  (ruby-mode . robe-mode)
-  (enh-ruby-mode . robe-mode)
-  :config
-  (push 'company-robe company-backends))
-
-;;;
 ;;; Misc
 ;;;
 
