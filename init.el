@@ -307,6 +307,8 @@
 
 (use-package dockerfile-mode)
 
+(use-package terraform-mode)
+
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
