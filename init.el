@@ -471,10 +471,12 @@ within an Org EXAMPLE block and a backlink to the file."
   (require 'ox-md)
   (require 'ox-html)
   (require 'ox-org)
+  (require 'ob-eshell)
   (setq org-babel-load-languages
 	'((emacs-lisp . t)
 	  (sql . t)
-	  (shell . t)))
+	  (shell . t)
+	  (eshell . t)))
   (org-babel-do-load-languages
    'org-babel-load-languages
    org-babel-load-languages)
