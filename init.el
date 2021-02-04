@@ -296,6 +296,12 @@
   (setq web-mode-markup-indent-offset 2))
 
 ;;;
+;;; Statistics
+;;;
+
+(use-package ess)
+
+;;;
 ;;; Misc
 ;;;
 
