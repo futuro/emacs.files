@@ -42,6 +42,11 @@
 ;; it
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
+;; I run the emacs server, so when I want to really truly kill emacs
+;; it's nice to have this bound.
+(global-set-key (kbd "C-x C-M-c")
+		'save-buffers-kill-emacs)
+
 ;; Set up a global key for hs-toggle-hiding
 (global-set-key (kbd "M-/") 'hs-toggle-hiding)
 
