@@ -533,5 +533,8 @@ within an Org EXAMPLE block and a backlink to the file."
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+;; Allow narrow-to-region from keybindings
+(put 'narrow-to-region 'disabled nil)
+
 ;; Start an emacs server
 (server-start)
