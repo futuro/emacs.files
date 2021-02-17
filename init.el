@@ -62,25 +62,14 @@
 ;;  Fonts
 ;;;
 
-(if (eq system-type 'darwin)
-    (set-face-attribute 'default nil
-			:background "#3F3F3F"
-			:foreground "#DCDCCC"
-			:slant 'normal
-			:weight 'normal
-			:height 100
-			:width 'normal
-			:foundry "nil"
-			:family "Source Code Pro for Powerline")
-  (set-face-attribute 'default nil
-		      :background "#3F3F3F"
-		      :foreground "#DCDCCC"
-		      :slant 'normal
-		      :weight 'normal
-		      :height 120
-		      :width 'normal
-		      :foundry "xos4"
-		      :family "Terminess Powerline"))
+(set-face-attribute 'default nil
+		    :background "#3F3F3F"
+		    :foreground "#DCDCCC"
+		    :slant 'normal
+		    :weight 'normal
+		    :height 240
+		    :width 'normal
+		    :family "Terminus")
 
 ;;;
 ;;  And now some packages
