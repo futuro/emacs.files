@@ -462,6 +462,7 @@ within an Org EXAMPLE block and a backlink to the file."
 	 ("C-c c" . org-capture)
 	 ([remap org-cycle-agenda-files] . avy-goto-word-1))
   :config
+  (setq org-fontify-quote-and-verse-blocks t)
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
   (require 'ox-md)
