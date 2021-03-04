@@ -105,7 +105,7 @@
   (setq auto-package-update-hide-results t))
 
 ;; mu4e is installed locally
-(if (not (eq system-type 'darwin))
+(if (file-directory-p "/usr/share/emacs/site-lisp/mu/mu4e")
     (use-package mu4e
       :load-path "/usr/share/emacs/site-lisp/mu/mu4e"
       :config
