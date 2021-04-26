@@ -242,22 +242,24 @@
   :init
   (add-hook 'clojure-mode-hook #'subword-mode)
   (add-hook 'clojure-mode-hook #'hs-minor-mode)
-  (setq clojure-use-metadata-for-privacy t))
+  :config
+  (setq clojure-use-metadata-for-privacy t)
+  (setq clojure-toplevel-inside-comment-form t))
 
 (use-package cider
   :hook (clojure-mode . cider-mode)
   :config
-  (setq cljr-auto-clean-ns nil)
-  (setq cljr-favor-prefix-notation t)
-  (setq cljr-favor-private-functions nil)
-  (setq clojure-toplevel-inside-comment-form t)
   (setq cider-repl-buffer-size-limit 200000)
   (setq cider-prompt-for-symbol nil)
   (setq cider-repl-history-file "~/.emacs.d/repl-history.clj")
   (setq cider-repl-pop-to-buffer-on-connect nil))
 
 (use-package clj-refactor
-  :hook (clojure-mode . clj-refactor-mode))
+  :hook (clojure-mode . clj-refactor-mode)
+  :config
+  (setq cljr-auto-clean-ns nil)
+  (setq cljr-favor-prefix-notation t)
+  (setq cljr-favor-private-functions nil))
 
 (use-package sayid
   :after clojure-mode
