@@ -62,14 +62,18 @@
 ;;  Fonts
 ;;;
 
-(set-face-attribute 'default nil
-		    :background "#3F3F3F"
-		    :foreground "#DCDCCC"
-		    :slant 'normal
-		    :weight 'normal
-		    :height 240
-		    :width 'normal
-		    :family "Terminus")
+;; (set-face-attribute 'default nil
+;; 		    :background "#3F3F3F"
+;; 		    :foreground "#DCDCCC"
+;; 		    :slant 'normal
+;; 		    :weight 'normal
+;; 		    :height 220
+;; 		    :width 'normal
+;; 		    :family "Terminus")
+
+;; HiDPI monitors and emacs act funny, but this gets me the right size
+;; on my second monitor
+(set-frame-font "-Xos4-Terminus-normal-normal-normal-*-26-*-*-*-m-*-iso10646-1")
 
 ;;;
 ;;  And now some packages
@@ -243,6 +247,7 @@
 (use-package cider
   :hook (clojure-mode . cider-mode)
   :config
+  (setq cider-repl-buffer-size-limit 200000)
   (setq cider-prompt-for-symbol nil)
   (setq cider-repl-history-file "~/.emacs.d/repl-history.clj")
   (setq cider-repl-pop-to-buffer-on-connect nil))
@@ -270,8 +275,20 @@
 ;;  Whitespace Sensitive Formats
 ;;;
 
+(defun aj-toggle-fold ()
+  "Toggle fold all lines larger than indentation on current line"
+  (interactive)
+  (let ((col 1))
+    (save-excursion
+      (back-to-indentation)
+      (setq col (+ 1 (current-column)))
+      (set-selective-display
+       (if selective-display nil (or col 1))))))
+
 (use-package yaml-mode
-  :mode "\\.yml\\'")
+  :mode "\\.yml\\'"
+  :bind
+  (("M-C-i" . aj-toggle-fold)))
 
 ;;;
 ;;  Web Development Settings
@@ -293,11 +310,18 @@
 ;;; Statistics
 ;;;
 
-(use-package ess)
+(use-package ess
+  :config
+  (setq ess-style 'DEFAULT))
 
 ;;;
 ;;; Misc
 ;;;
+
+;; Typescript
+(use-package tide)
+
+(use-package w3m)
 
 (use-package dockerfile-mode)
 
@@ -314,10 +338,17 @@
 
 (use-package magit)
 
+(use-package git-commit
+  ;; :config
+  ;; (setq git-commit-major-mode 'markdown-mode)
+  )
+
+;; The forge package uses this, but since it's applicable no matter
+;; the package that's using it, I've pulled it into the top-level.
+(setq auth-sources '("~/.authinfo.gpg"))
+
 (use-package forge
-  :after magit
-  :config
-  (setq auth-sources (quote (macos-keychain-internet))))
+  :after magit)
 
 (use-package git-link
   :config
