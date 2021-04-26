@@ -247,6 +247,10 @@
 (use-package cider
   :hook (clojure-mode . cider-mode)
   :config
+  (setq cljr-auto-clean-ns nil)
+  (setq cljr-favor-prefix-notation t)
+  (setq cljr-favor-private-functions nil)
+  (setq clojure-toplevel-inside-comment-form t)
   (setq cider-repl-buffer-size-limit 200000)
   (setq cider-prompt-for-symbol nil)
   (setq cider-repl-history-file "~/.emacs.d/repl-history.clj")
@@ -312,7 +316,8 @@
 
 (use-package ess
   :config
-  (setq ess-style 'DEFAULT))
+  (setq ess-style 'DEFAULT)
+  (setq ess-ask-for-ess-directory t))
 
 ;;;
 ;;; Misc
@@ -336,7 +341,9 @@
 (use-package rainbow-delimiters
   :hook (clojure-mode . rainbow-delimiters-mode))
 
-(use-package magit)
+(use-package magit
+  :config
+  (setq magit-delete-by-moving-to-trash nil))
 
 (use-package git-commit
   ;; :config
