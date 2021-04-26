@@ -364,9 +364,7 @@
   ("C-c p" . projectile-command-map)
   :config
   (projectile-mode +1)
-  (if (not (eq system-type 'darwin))
-      (setq projectile-project-search-path '("~/devel/"))
-    (setq projectile-project-search-path '("~/devel/" "~/devel/active-repos/" "~/devel/archived-repos/")))
+  (setq projectile-project-search-path '("~/devel/" "~/devel/gastrograph"))
   (setq projectile-completion-system 'ivy)
   (setq projectile-enable-caching nil)
   (push ".cpcache" projectile-globally-ignored-directories)
