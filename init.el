@@ -352,7 +352,7 @@
   :ensure t
   :init (global-flycheck-mode)
   :config
-  (setq flycheck-global-modes '(not org-mode)))
+  (setq flycheck-global-modes '(not org-mode emacs-lisp-mode)))
 
 (use-package rainbow-delimiters
   :hook (clojure-mode . rainbow-delimiters-mode))
