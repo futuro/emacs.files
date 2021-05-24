@@ -385,6 +385,8 @@
 (use-package projectile
   :bind-keymap
   ("C-c p" . projectile-command-map)
+  :bind (:map projectile-command-map
+	 ("s s" . counsel-projectile-rg))
   :config
   (projectile-mode +1)
   (setq projectile-project-search-path '("~/devel/" "~/devel/gastrograph"))
