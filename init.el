@@ -4,8 +4,10 @@
 
 ;; delete excess backup versions silently
 (setq delete-old-versions -1)
+
 ;; use version control
 (setq version-control t)
+
 ;; Which directory to put backups file
 ;; This is like a very crude version control for any file
 ;; that isn't otherwise version controlled
