@@ -49,6 +49,18 @@
 (global-set-key (kbd "C-x C-M-c")
 		'save-buffers-kill-emacs)
 
+(defun futuro/describe-symbol (&optional arg)
+  "Describe the symbol at point.
+
+ With prefix arg ARG, prompts for symbol."
+  (interactive "P")
+  (if (not arg)
+      (describe-symbol (symbol-at-point))
+    (call-interactively #'describe-symbol)))
+
+(global-set-key (kbd "C-h C-h")
+		'futuro/describe-symbol)
+
 ;; Set up a global key for hs-toggle-hiding
 (global-set-key (kbd "M-/") 'hs-toggle-hiding)
 
