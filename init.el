@@ -263,7 +263,11 @@
 (use-package cider
   :hook (clojure-mode . cider-mode)
   :config
+  (setq cider-print-options '(("length" 50) ("right-margin" 120)))
+  (setq cider-print-fn 'fipp)
+  (setq cider-doc-auto-select-buffer nil)
   (setq cider-repl-buffer-size-limit 200000)
+  (setq cider-repl-prompt-function 'cider-repl-prompt-abbreviated)
   (setq cider-prompt-for-symbol nil)
   (setq cider-repl-history-file "~/.emacs.d/repl-history.clj")
   (setq cider-repl-pop-to-buffer-on-connect nil))
