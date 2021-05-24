@@ -22,3 +22,4 @@ transient/
 /forge-database.sqlite
 /org-clock-save.el
 /url/
+/flycheck_init.el
