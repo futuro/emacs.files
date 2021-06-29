@@ -388,6 +388,12 @@
   :config
   (setq git-link-use-commit t))
 
+;; Handle org links to magit buffers
+(use-package orgit)
+
+;; Handle org links to forge buffers
+(use-package orgit-forge)
+
 (use-package exec-path-from-shell
   :config
   (setq exec-path-from-shell-shell-name "/bin/zsh")
