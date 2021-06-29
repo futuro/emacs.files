@@ -406,7 +406,7 @@
 	 ("s s" . counsel-projectile-rg))
   :config
   (projectile-mode +1)
-  (setq projectile-project-search-path '("~/devel/" "~/devel/gastrograph"))
+  (setq projectile-project-search-path '("~/devel/" "~/devel/misc"))
   (setq projectile-completion-system 'ivy)
   (setq projectile-enable-caching nil)
   (push ".cpcache" projectile-globally-ignored-directories)
