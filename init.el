@@ -49,6 +49,13 @@
 (global-set-key (kbd "C-x C-M-c")
 		'save-buffers-kill-emacs)
 
+(defun futuro/edit-init-el ()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+(global-set-key (kbd "C-x C-M-i")
+		'futuro/edit-init-el)
+
 (defun futuro/describe-symbol (&optional arg)
   "Describe the symbol at point.
 
